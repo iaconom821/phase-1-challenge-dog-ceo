@@ -24,6 +24,35 @@ document.addEventListener('DOMContentLoaded', function () {
  
 })
 grabDogs()
+
+
 })
  
-
+document.addEventListener('DOMContentLoaded', function () {
+    function makeDogList(obj) {
+        console.log('hello')
+        const breedlist = document.querySelector('#dog-breeds')
+        for(const breed in obj.message) {
+            if(obj.message[breed] != []) {
+                for(let type of obj.message[breed]) {
+                const makeSpecificBreed = document.createElement('ul')
+                const makeBreed = document.createElement('li')
+                makeBreed.innerText = breed + ' ' + type
+                makeSpecificBreed.append(makeBreed)
+                breedlist.append(makeSpecificBreed)
+                }
+            } else if (obj.message[breed] == []){
+                const makeBreed = document.createElement('li')
+                makeBreed.innerText = breed
+                breedlist.append(makeBreed)
+            }
+        }
+    }
+    
+    const grabBreeds = () => fetch('https://dog.ceo/api/breeds/list/all').then(response => response.json()).then(function (obj) {
+        makeDogList(obj)
+    })
+    
+    grabBreeds()
+    
+})
