@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
     //console.log(dogImages)
     const grabDogs = () => fetch('https://dog.ceo/api/breeds/image/random/4').then(response => response.json())
 .then(function(obj) {
-    console.log('hello')
+    
     obj.message.forEach(function (elem) {
         const makeImage = document.createElement('img')
         makeImage.setAttribute("alt", "src")
@@ -30,10 +30,10 @@ grabDogs()
  
 document.addEventListener('DOMContentLoaded', function () {
     function makeDogList(obj) {
-        console.log('hello')
+        
         const breedlist = document.querySelector('#dog-breeds')
         for(const breed in obj.message) {
-            if(obj.message[breed] != []) {
+            if(obj.message[breed].length > 0) {
                 for(let type of obj.message[breed]) {
                 const makeSpecificBreed = document.createElement('ul')
                 const makeBreed = document.createElement('li')
@@ -41,8 +41,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 makeSpecificBreed.append(makeBreed)
                 breedlist.append(makeSpecificBreed)
                 }
-            } else if (obj.message[breed] == []){
+            } else {
+                
+                
                 const makeBreed = document.createElement('li')
+                
+                makeBreed.id = breed
                 makeBreed.innerText = breed
                 breedlist.append(makeBreed)
             }
